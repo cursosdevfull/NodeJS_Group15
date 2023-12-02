@@ -1,4 +1,6 @@
-import { Address } from '../entities/address';
+import { v4 as uuidv4 } from "uuid";
+
+import { Address } from "../entities/address";
 
 export enum GENDER {
   HOMBRE = "HOMBRE",
@@ -27,6 +29,11 @@ export interface UserOptionals {
 
 export type UserProperties = UserEssentials & Partial<UserOptionals>;
 
+export type UserUpdateProperties = Partial<
+  Omit<UserEssentials, "id" | "email"> &
+    Pick<UserOptionals, "age" | "gender" | "address" | "image" | "refreshToken">
+>;
+
 export class User {
   private readonly id: string;
   private name: string;
@@ -44,20 +51,36 @@ export class User {
   private deletedAt: Date | null;
 
   constructor(properties: UserProperties) {
-    if (!properties.age && properties.age < 18) {
-      throw new Error("User must be older than 18");
-    }
-    if (properties.roles.length === 0)
-      throw new Error("User must have at least one role");
-    if (!properties.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))
-      throw new Error("Invalid email");
-
-    if (properties.name.length < 3)
-      throw new Error("Name must be at least 3 characters long");
-    if (properties.lastname.length < 3)
-      throw new Error("Lastname must be at least 3 characters long");
-
     Object.assign(this, properties);
     this.createdAt = new Date();
+    this.refreshToken = uuidv4();
+  }
+
+  properties(): UserProperties {
+    return {
+      id: this.id,
+      name: this.name,
+      lastname: this.lastname,
+      email: this.email,
+      password: this.password,
+      roles: this.roles,
+      gender: this.gender,
+      address: this.address,
+      age: this.age,
+      image: this.image,
+      refreshToken: this.refreshToken,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+      deletedAt: this.deletedAt,
+    };
+  }
+
+  update(fields: UserUpdateProperties) {
+    Object.assign(this, fields);
+    this.updatedAt = new Date();
+  }
+
+  delete() {
+    this.deletedAt = new Date();
   }
 }

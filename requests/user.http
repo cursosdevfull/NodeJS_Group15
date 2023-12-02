@@ -1,1 +1,51 @@
-GET http://localhost:3000/user
+### Crear un usuario
+POST http://localhost:3000/v1/user
+content-type: application/json
+
+{
+    "id": "6f2a6a96-e4d6-43c5-b470-2cd411b1da36",
+    "name": "Sergio",
+    "lastname": "Hidalgo",
+    "email": "sergio@correo.com",
+    "roles": ["admin"],
+    "password": "Mundo2023",
+    "age": 23,
+    "gender": "HOMBRE",
+    "address": {
+        "street": "Calle 1",
+        "number": 123,
+        "city": "Bogota",
+        "country": "Colombia"
+    },
+    "image": "photo.jpg"
+}
+
+### Listar los usuarios
+GET http://localhost:3000/v1/user
+
+### Obtener un usuario
+GET http://localhost:3000/v1/user/6f2a6a96-e4d6-43c5-b470-2cd411b1da36
+
+### Actualizar un usuario
+PUT http://localhost:3000/v1/user/6f2a6a96-e4d6-43c5-b470-2cd411b1da36
+content-type: application/json
+
+{
+    "name": "Sergio",
+    "lastname": "Hidalgo",
+    "roles": ["admin"],
+    "password": "Mundo2023",
+    "age": 23,
+    "gender": "HOMBRE",
+    "address": {
+        "street": "Calle 1",
+        "number": 123,
+        "city": "Bogota",
+        "country": "Colombia"
+    },
+    "image": "photo.jpg"
+}
+
+
+### Eliminar un usuario
+DELETE http://localhost:3000/v1/user/6f2a6a96-e4d6-43c5-b470-2cd411b1da36

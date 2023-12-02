@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": "fd23a0ad-0873-4bab-ba3c-69c4af11b29e",
+      "name": "John",
+      "lastname": "Smith",
+      "email": "j@correo.com",
+      "password": "Testing123",
+      "roles": ["admin"]
+    },
+    {
+      "id": "9dd392dc-0fa3-475c-9a96-84c50d649d06",
+      "name": "Frank",
+      "lastname": "Smith",
+      "email": "frank@correo.com",
+      "password": "Testing123",
+      "roles": ["admin"]
+    }
+  ]
+}
