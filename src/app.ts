@@ -1,7 +1,7 @@
 import express, { Application } from "express";
 
 import roleRouter from "./modules/v1/role/infrastructure/routes";
-import userRouter from "./modules/v1/user/infrastructure/routes";
+import userRouter from "./modules/v1/user/infrastructure/presentation/routes";
 
 class App {
   expressApp: Application;

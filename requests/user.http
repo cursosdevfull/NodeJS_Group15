@@ -24,7 +24,7 @@ content-type: application/json
 GET http://localhost:3000/v1/user
 
 ### Obtener un usuario
-GET http://localhost:3000/v1/user/6f2a6a96-e4d6-43c5-b470-2cd411b1da36
+GET http://localhost:3000/v1/user/9dd392dc-0fa3-475c-9a96-84c50d649d06
 
 ### Actualizar un usuario
 PUT http://localhost:3000/v1/user/6f2a6a96-e4d6-43c5-b470-2cd411b1da36
@@ -49,3 +49,6 @@ content-type: application/json
 
 ### Eliminar un usuario
 DELETE http://localhost:3000/v1/user/6f2a6a96-e4d6-43c5-b470-2cd411b1da36
+
+### Obtener por página
+GET http://localhost:3000/v1/user/page?page=0&limit=2

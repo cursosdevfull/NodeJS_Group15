@@ -1,5 +1,8 @@
 import { validate } from "uuid";
 
+import { AgeVO } from "../../infrastructure/value-objects/age.vo";
+import { EmailVO } from "../../infrastructure/value-objects/email.vo";
+import { RolesVO } from "../../infrastructure/value-objects/roles.vo";
 import { GENDER, User, UserProperties } from "./user";
 
 export class UserFactory {
@@ -9,14 +12,9 @@ export class UserFactory {
     if (properties.gender && !(properties.gender in GENDER))
       throw new Error("Gender must be HOMBRE or MUJER");
 
-    if (properties.age && properties.age < 18) {
-      throw new Error("User must be older than 18");
-    }
-    if (!properties.roles || properties.roles?.length === 0)
-      throw new Error("User must have at least one role");
-
-    if (!properties.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))
-      throw new Error("Invalid email");
+    AgeVO.create(properties.age);
+    RolesVO.create(properties.roles);
+    EmailVO.create(properties.email);
 
     if (properties.name.length < 3)
       throw new Error("Name must be at least 3 characters long");
@@ -24,13 +22,13 @@ export class UserFactory {
     if (properties.lastname.length < 3)
       throw new Error("Lastname must be at least 3 characters long");
 
-    if (properties.address && properties.address.city.length < 3)
+    if (properties.address && properties.address?.city?.length < 3)
       throw new Error("City must be at least 3 characters long");
-    if (properties.address && properties.address.country.length < 3)
+    if (properties.address && properties.address?.country?.length < 3)
       throw new Error("Country must be at least 3 characters long");
-    if (properties.address && properties.address.street.length < 3)
+    if (properties.address && properties.address?.street?.length < 3)
       throw new Error("Street must be at least 3 characters long");
-    if (properties.address && properties.address.number <= 0)
+    if (properties.address && properties.address?.number <= 0)
       throw new Error("Number must be greater than 0");
 
     if (!properties.password) throw new Error("Password is required");
