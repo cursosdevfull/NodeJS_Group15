@@ -1,8 +1,12 @@
 import { validate } from "uuid";
 
-import { AgeVO } from "../../infrastructure/value-objects/age.vo";
-import { EmailVO } from "../../infrastructure/value-objects/email.vo";
-import { RolesVO } from "../../infrastructure/value-objects/roles.vo";
+import { AgeVO } from "../value-objects/age.vo";
+import { EmailVO } from "../value-objects/email.vo";
+import { NumberValueVO } from "../value-objects/number-value.vo";
+import { PatternVO } from "../value-objects/pattern.vo";
+import { RequiredVO } from "../value-objects/required.vo";
+import { RolesVO } from "../value-objects/roles.vo";
+import { StringLengthVO } from "../value-objects/string-length.vo";
 import { GENDER, User, UserProperties } from "./user";
 
 export class UserFactory {
@@ -16,34 +20,26 @@ export class UserFactory {
     RolesVO.create(properties.roles);
     EmailVO.create(properties.email);
 
-    if (properties.name.length < 3)
-      throw new Error("Name must be at least 3 characters long");
+    StringLengthVO.create(properties.name, 3, "Name");
+    StringLengthVO.create(properties.lastname, 3, "Lastname");
 
-    if (properties.lastname.length < 3)
-      throw new Error("Lastname must be at least 3 characters long");
+    if (properties.address && properties.address?.city)
+      StringLengthVO.create(properties.address.city, 3, "City");
+    if (properties.address && properties.address?.country)
+      StringLengthVO.create(properties.address.country, 3, "Country");
+    if (properties.address && properties.address?.street)
+      StringLengthVO.create(properties.address.street, 3, "Street");
+    if (properties.address && properties.address)
+      NumberValueVO.create(properties.address.number, 0, "Number");
 
-    if (properties.address && properties.address?.city?.length < 3)
-      throw new Error("City must be at least 3 characters long");
-    if (properties.address && properties.address?.country?.length < 3)
-      throw new Error("Country must be at least 3 characters long");
-    if (properties.address && properties.address?.street?.length < 3)
-      throw new Error("Street must be at least 3 characters long");
-    if (properties.address && properties.address?.number <= 0)
-      throw new Error("Number must be greater than 0");
+    RequiredVO.create(properties.password, "Password");
+    PatternVO.create(
+      properties.password,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+      "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter and one number"
+    );
 
-    if (!properties.password) throw new Error("Password is required");
-
-    if (
-      !properties.password?.match(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
-      )
-    )
-      throw new Error(
-        "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter and one number"
-      );
-
-    if (properties.image?.length < 3)
-      throw new Error("Image must be at least 3 characters long");
+    if (properties.image) StringLengthVO.create(properties.image, 3, "Image");
 
     return new User(properties);
   }
