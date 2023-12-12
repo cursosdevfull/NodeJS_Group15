@@ -1,11 +1,13 @@
-import { Application } from 'express';
-import * as http from 'http';
+import { Application } from "express";
+import * as http from "http";
 
-export class ServerBootstrap {
+import { IBootstrap } from "./bootstrap.interface";
+
+export class ServerBootstrap implements IBootstrap {
   constructor(private readonly app: Application) {}
 
   async initialize() {
-    const promise = new Promise((resolve, reject) => {
+    const promise = new Promise<boolean>((resolve, reject) => {
       const server = http.createServer(this.app);
 
       server
