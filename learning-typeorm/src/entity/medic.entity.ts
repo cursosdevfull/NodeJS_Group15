@@ -20,7 +20,7 @@ export class MedicEntity {
   @Column({ type: "varchar", length: 100 })
   lastname: string;
 
-  @Column()
+  @Column({ nullable: true })
   age: number;
 
   @Column({ type: "varchar", length: 5, unique: true })

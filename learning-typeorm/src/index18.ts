@@ -5,7 +5,7 @@ AppDataSource.initialize()
   .then(async () => {
     const manager = AppDataSource.manager;
 
-    const sql = await manager
+    const specialty = await manager
       .createQueryBuilder()
       .from(SpecialtyEntity, "specialty")
       //.select(["medic.id", "medic.name", "medic.lastname"])
@@ -13,9 +13,9 @@ AppDataSource.initialize()
       //.select("medic.id, medic.name, medic.lastname")
       //.where("medic.id = 6")
       .where("specialty.id = 3")
-      .getSql();
+      .getOne();
 
-    console.log(sql);
+    console.log(specialty);
 
     console.log("Database initialized");
   })

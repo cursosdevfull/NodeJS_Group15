@@ -6,10 +6,10 @@ AppDataSource.initialize()
     const medic = new MedicEntity();
     medic.name = "Sergio";
     medic.lastname = "Hidalgo";
-    medic.age = 30;
-    medic.cmp = "12345";
+    //medic.age = 30;
+    medic.cmp = "01234";
     medic.gender = "MALE";
-    medic.email = "sergio@email.com";
+    medic.email = "sergioc@email.com";
 
     try {
       await AppDataSource.getRepository(MedicEntity).save(medic);

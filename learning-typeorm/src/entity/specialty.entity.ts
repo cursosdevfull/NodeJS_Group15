@@ -10,6 +10,6 @@ export class SpecialtyEntity {
   @Column({ type: "varchar", length: 100 })
   name: string;
 
-  @ManyToMany(() => MedicEntity, (medic) => medic.specialties)
+  @ManyToMany(() => MedicEntity, (medic) => medic.specialties, { eager: true })
   medics: MedicEntity[];
 }

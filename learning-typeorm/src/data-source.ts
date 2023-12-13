@@ -13,7 +13,7 @@ export const AppDataSource = new DataSource({
   password: "12345",
   database: "cursodb",
   synchronize: true,
-  logging: true,
+  logging: false,
   entities: [MedicEntity, SpecialtyEntity],
   migrations: [],
   subscribers: [],

@@ -1,21 +1,20 @@
 import { AppDataSource } from "./data-source";
-import { SpecialtyEntity } from "./entity/specialty.entity";
+import { MedicEntity } from "./entity/medic.entity";
 
 AppDataSource.initialize()
   .then(async () => {
-    const manager = AppDataSource.manager;
+    const repository = AppDataSource.getRepository(MedicEntity);
 
-    const sql = await manager
+    const medic = await repository
       .createQueryBuilder()
-      .from(SpecialtyEntity, "specialty")
       //.select(["medic.id", "medic.name", "medic.lastname"])
-      .select(["specialty.name"])
+      .select(["MedicEntity.id", "MedicEntity.name", "MedicEntity.lastname"])
       //.select("medic.id, medic.name, medic.lastname")
       //.where("medic.id = 6")
-      .where("specialty.id = 3")
-      .getSql();
+      .where("MedicEntity.id = 6")
+      .getOne();
 
-    console.log(sql);
+    console.log(medic);
 
     console.log("Database initialized");
   })
