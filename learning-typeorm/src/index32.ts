@@ -5,15 +5,21 @@ AppDataSource.initialize()
   .then(async () => {
     const manager = AppDataSource.manager;
 
-    const result = await manager
+    await manager
       .createQueryBuilder()
       .from(MedicEntity, "medic")
-      .select(["medic.name", "medic.lastname"])
-      .leftJoinAndSelect("medic.specialties", "specialty")
-      .where("specialty.id <> :id", { id: 3 })
-      .getRawMany();
-
-    console.log(result);
+      .insert()
+      .values([
+        {
+          name: "Javier",
+          lastname: "Gonzalez",
+          age: 35,
+          email: "javier@correo.com",
+          cmp: "24689",
+          gender: "MALE",
+        },
+      ])
+      .execute();
 
     console.log("Database initialized");
   })
