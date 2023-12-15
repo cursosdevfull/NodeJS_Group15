@@ -29,7 +29,7 @@ export class UserDto {
     userResponse.name = props.name;
     userResponse.lastname = props.lastname;
     userResponse.email = props.email;
-    userResponse.roles = props.roles;
+    //userResponse.roles = props.roles;
     userResponse.gender = props.gender;
     userResponse.address = {
       street: props.address?.street,

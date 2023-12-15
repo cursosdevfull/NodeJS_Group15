@@ -5,16 +5,14 @@
       "name": "John",
       "lastname": "Smith",
       "email": "j@correo.com",
-      "password": "Testing123",
-      "roles": ["admin"]
+      "password": "Testing123"
     },
     {
       "id": "9dd392dc-0fa3-475c-9a96-84c50d649d06",
       "name": "Frank",
       "lastname": "Smith",
       "email": "frank@correo.com",
-      "password": "Testing123",
-      "roles": ["admin"]
+      "password": "Testing123"
     }
   ]
 }

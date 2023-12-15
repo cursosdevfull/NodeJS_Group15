@@ -5,7 +5,6 @@ import { EmailVO } from "../value-objects/email.vo";
 import { NumberValueVO } from "../value-objects/number-value.vo";
 import { PatternVO } from "../value-objects/pattern.vo";
 import { RequiredVO } from "../value-objects/required.vo";
-import { RolesVO } from "../value-objects/roles.vo";
 import { StringLengthVO } from "../value-objects/string-length.vo";
 import { GENDER, User, UserProperties } from "./user";
 
@@ -17,7 +16,7 @@ export class UserFactory {
       throw new Error("Gender must be HOMBRE or MUJER");
 
     AgeVO.create(properties.age);
-    RolesVO.create(properties.roles);
+    //RolesVO.create(properties.roles);
     EmailVO.create(properties.email);
 
     StringLengthVO.create(properties.name, 3, "Name");

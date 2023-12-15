@@ -13,7 +13,7 @@ export interface UserEssentials {
   lastname: string;
   email: string;
   password: string;
-  roles: string[];
+  //roles: string[];
 }
 
 export interface UserOptionals {
@@ -40,7 +40,7 @@ export class User {
   private lastname: string;
   private readonly email: string;
   private password: string;
-  private roles: string[];
+  //private roles: string[];
   private gender: GENDER;
   private address: Address;
   private age: number;
@@ -63,7 +63,7 @@ export class User {
       lastname: this.lastname,
       email: this.email,
       password: this.password,
-      roles: this.roles,
+      //roles: this.roles,
       gender: this.gender,
       address: this.address,
       age: this.age,

@@ -21,7 +21,7 @@ export class UserDto {
       lastname: data.lastname,
       email: data.email,
       password: data.password,
-      roles: data.roles,
+      //roles: data.roles,
       gender: GENDER[data.gender as keyof typeof GENDER],
       address,
       age: data.age,
@@ -48,7 +48,7 @@ export class UserDto {
       lastname: props.lastname,
       email: props.email,
       password: props.password,
-      roles: props.roles,
+      //roles: props.roles,
       gender: props.gender,
       address: {
         street: props.address?.street,
