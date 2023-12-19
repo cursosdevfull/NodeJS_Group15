@@ -1,3 +1,5 @@
+import { plainToInstance } from "class-transformer";
+
 import { Address } from "../../domain/entities/address";
 import { GENDER, User, UserProperties } from "../../domain/roots/user";
 import { UserFactory } from "../../domain/roots/user.factory";
@@ -23,7 +25,7 @@ export class UserDto {
       password: data.password,
       //roles: data.roles,
       gender: GENDER[data.gender as keyof typeof GENDER],
-      address,
+      address: data.address,
       age: data.age,
       image: data.image,
       refreshToken: data.refreshToken,
@@ -42,26 +44,23 @@ export class UserDto {
 
     const props = data.properties();
 
-    return {
-      id: props.id,
-      name: props.name,
-      lastname: props.lastname,
-      email: props.email,
-      password: props.password,
-      //roles: props.roles,
-      gender: props.gender,
-      address: {
-        street: props.address?.street,
-        number: props.address?.number,
-        city: props.address?.city,
-        country: props.address?.country,
-      },
-      age: props.age,
-      image: props.image,
-      refreshToken: props.refreshToken,
-      createdAt: props.createdAt,
-      updatedAt: props.updatedAt,
-      deletedAt: props.deletedAt,
-    };
+    const userEntity = plainToInstance(UserEntity, props);
+
+    // const userEntity = new UserEntity();
+    // userEntity.id = props.id;
+    // userEntity.name = props.name;
+    // userEntity.lastname = props.lastname;
+    // userEntity.email = props.email;
+    // userEntity.password = props.password;
+    // userEntity.gender = props.gender;
+    // userEntity.address = props.address;
+    // userEntity.age = props.age;
+    // userEntity.image = props.image;
+    // userEntity.refreshToken = props.refreshToken;
+    // userEntity.createdAt = props.createdAt;
+    // userEntity.updatedAt = props.updatedAt;
+    // userEntity.deletedAt = props.deletedAt;
+
+    return userEntity;
   }
 }

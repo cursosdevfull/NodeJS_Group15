@@ -52,8 +52,8 @@ export class User {
 
   constructor(properties: UserProperties) {
     Object.assign(this, properties);
-    this.createdAt = new Date();
-    this.refreshToken = uuidv4();
+    if (!properties.createdAt) this.createdAt = new Date();
+    if (!properties.refreshToken) this.refreshToken = uuidv4();
   }
 
   properties(): UserProperties {

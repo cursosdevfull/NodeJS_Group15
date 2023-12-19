@@ -9,8 +9,6 @@ import { ServerBootstrap } from "./bootstrap/server.bootstrap";
 
 dotenv.config();
 
-dotenv.config();
-
 const server = new ServerBootstrap(app);
 const database = new DatabaseBootstrap();
 
@@ -23,6 +21,7 @@ const database = new DatabaseBootstrap();
     await Promise.all(listPromisesBootstrap);
     console.log("Connect to database successfully");
   } catch (error: any) {
+    database.close();
     console.log(`Error occurred: ${error.message}`);
   }
 })();

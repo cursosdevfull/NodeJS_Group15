@@ -3,7 +3,6 @@ import { validate } from "uuid";
 import { AgeVO } from "../value-objects/age.vo";
 import { EmailVO } from "../value-objects/email.vo";
 import { NumberValueVO } from "../value-objects/number-value.vo";
-import { PatternVO } from "../value-objects/pattern.vo";
 import { RequiredVO } from "../value-objects/required.vo";
 import { StringLengthVO } from "../value-objects/string-length.vo";
 import { GENDER, User, UserProperties } from "./user";
@@ -32,11 +31,11 @@ export class UserFactory {
       NumberValueVO.create(properties.address.number, 0, "Number");
 
     RequiredVO.create(properties.password, "Password");
-    PatternVO.create(
+    /*PatternVO.create(
       properties.password,
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
       "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter and one number"
-    );
+    );*/
 
     if (properties.image) StringLengthVO.create(properties.image, 3, "Image");
 

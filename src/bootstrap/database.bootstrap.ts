@@ -8,7 +8,6 @@ export class DatabaseBootstrap implements IBootstrap {
 
   async initialize() {
     const dbConfig = Parameters.dbConfig;
-    console.log(dbConfig);
     const appDataSource = new DataSource({
       type: "mysql",
       ...dbConfig,
@@ -17,5 +16,13 @@ export class DatabaseBootstrap implements IBootstrap {
     DatabaseBootstrap.appDataSource = appDataSource;
 
     return appDataSource.initialize();
+  }
+
+  static getDataSource(): DataSource {
+    return DatabaseBootstrap.appDataSource;
+  }
+
+  close() {
+    return DatabaseBootstrap.appDataSource?.destroy();
   }
 }

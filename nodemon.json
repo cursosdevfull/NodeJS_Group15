@@ -1,0 +1,13 @@
+{
+  "watch": ["src/", ".env"],
+  "ext": "ts json",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ignore": ["node_modules"],
+  "execMap": {
+    "ts": "ts-node"
+  },
+  "verbose": true,
+  "restartable": "rs"
+}

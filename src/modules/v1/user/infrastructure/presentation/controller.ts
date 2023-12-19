@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 
+import { CryptService } from "../../application/services/crypt.service";
 import { UserCreate } from "../../application/user-create";
 import { UserDelete } from "../../application/user-delete";
 import { UserGetByPage } from "../../application/user-get-by-page";
@@ -26,6 +27,7 @@ export class UserController {
 
   async insert(req: Request, res: Response) {
     const body = req.body;
+    body.password = await CryptService.hash(body.password);
 
     const user = UserFactory.create(body);
 
