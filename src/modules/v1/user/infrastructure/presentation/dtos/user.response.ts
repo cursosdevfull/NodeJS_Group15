@@ -1,4 +1,5 @@
 import { Pagination } from "../../../../../core/interface/pagination";
+import { Role } from "../../../domain/entities/role";
 import { User } from "../../../domain/roots/user";
 
 export class UserResponse {
@@ -6,7 +7,7 @@ export class UserResponse {
   name: string;
   lastname: string;
   email: string;
-  roles: string[];
+  roles: Role[];
   gender: string;
   address: { street: string; number: number; city: string; country: string };
   age: number;
@@ -37,6 +38,7 @@ export class UserDto {
       city: props.address?.city,
       country: props.address?.country,
     };
+    userResponse.roles = props.roles;
     userResponse.age = props.age;
     userResponse.image = props.image;
 

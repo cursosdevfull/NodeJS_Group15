@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 
 import { Address } from "../entities/address";
+import { Role } from "../entities/role";
 
 export enum GENDER {
   HOMBRE = "HOMBRE",
@@ -13,7 +14,7 @@ export interface UserEssentials {
   lastname: string;
   email: string;
   password: string;
-  //roles: string[];
+  roles: Role[];
 }
 
 export interface UserOptionals {
@@ -40,7 +41,7 @@ export class User {
   private lastname: string;
   private readonly email: string;
   private password: string;
-  //private roles: string[];
+  private roles: Role[];
   private gender: GENDER;
   private address: Address;
   private age: number;
@@ -63,7 +64,7 @@ export class User {
       lastname: this.lastname,
       email: this.email,
       password: this.password,
-      //roles: this.roles,
+      roles: this.roles,
       gender: this.gender,
       address: this.address,
       age: this.age,

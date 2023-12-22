@@ -22,7 +22,7 @@ class UserRoutes {
   }
 
   private mountRoutes(): void {
-    this.router.post("/", (req, res) => this.controller.insert(req, res));
+    this.router.post("/", this.controller.insert);
     this.router.get("/", (req, res) => this.controller.list(req, res));
     this.router.get("/page", (req, res) => this.controller.getByPage(req, res));
     this.router.get("/:id", (req, res) => this.controller.getOne(req, res));

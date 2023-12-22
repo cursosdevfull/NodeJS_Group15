@@ -19,9 +19,6 @@ export class UserEntity {
   @Column({ type: "varchar", length: 100 })
   password: string;
 
-  /*@Column({type: "varchar", length: 50})
-  roles: string[];*/
-
   @Column({ type: "varchar", length: 10, nullable: true })
   gender: string;
 
@@ -46,7 +43,7 @@ export class UserEntity {
   @Column({ type: "timestamp", nullable: true })
   deletedAt: Date | null;
 
-  @ManyToMany(() => RoleEntity, (role) => role.users)
+  @ManyToMany(() => RoleEntity, (role) => role.users, { eager: true })
   @JoinTable()
   roles: RoleEntity[];
 }

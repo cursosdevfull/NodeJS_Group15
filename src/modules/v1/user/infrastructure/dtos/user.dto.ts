@@ -1,6 +1,7 @@
 import { plainToInstance } from "class-transformer";
 
 import { Address } from "../../domain/entities/address";
+import { Role } from "../../domain/entities/role";
 import { GENDER, User, UserProperties } from "../../domain/roots/user";
 import { UserFactory } from "../../domain/roots/user.factory";
 import { UserEntity } from "../entities/user.entity";
@@ -23,7 +24,7 @@ export class UserDto {
       lastname: data.lastname,
       email: data.email,
       password: data.password,
-      //roles: data.roles,
+      roles: data.roles.map((role) => new Role(role.id, role.name)),
       gender: GENDER[data.gender as keyof typeof GENDER],
       address: data.address,
       age: data.age,

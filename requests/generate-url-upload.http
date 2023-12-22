@@ -1,0 +1,2 @@
+### Crear un usuario
+GET http://localhost:3000/v1/generate-url-upload?extension=jpg

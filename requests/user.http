@@ -3,11 +3,10 @@ POST http://localhost:3000/v1/user
 content-type: application/json
 
 {
-    "id": "6f2a6a96-e4d6-43c5-b470-2cd411b1da36",
+    "id": "289be435-991e-49be-8540-41304a993e14",
     "name": "Sergio",
     "lastname": "Hidalgo",
-    "email": "sergio@correo.com",
-    "roles": ["admin"],
+    "email": "sergio26@correo.com",
     "password": "Mundo2023",
     "age": 23,
     "gender": "HOMBRE",
@@ -17,7 +16,8 @@ content-type: application/json
         "city": "Bogota",
         "country": "Colombia"
     },
-    "image": "photo.jpg"
+    "image": "a5c97def-ec8d-48fc-9be2-ce12b986acb7.jpg",
+    "roles": [{"id": "dd48a1da-e11a-41c7-a16c-2e48189045e0"}, {"id": "91166239-f259-4d0e-ba72-b105557e6753"}]
 }
 
 ### Listar los usuarios
@@ -33,7 +33,6 @@ content-type: application/json
 {
     "name": "Sergio",
     "lastname": "Hidalgo",
-    "roles": ["admin"],
     "password": "Mundo2023",
     "age": 40,
     "gender": "HOMBRE",
@@ -43,7 +42,8 @@ content-type: application/json
         "city": "Bogota",
         "country": "Colombia"
     },
-    "image": "photo.jpg"
+    "image": "a5c97def-ec8d-48fc-9be2-ce12b986acb7.jpg",
+    "roles": [{"id": "dd48a1da-e11a-41c7-a16c-2e48189045e0"}, {"id": "91166239-f259-4d0e-ba72-b105557e6753"}, {"id": "03397abb-6022-4324-a8c5-027690a5e0de"}]
 }
 
 

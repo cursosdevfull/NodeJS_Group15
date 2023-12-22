@@ -33,4 +33,16 @@ export class Parameters {
         Number(process.env.DB_MAX_QUERY_EXECUTION_TIME) || 1000,
     };
   }
+
+  static get bucket_name_images() {
+    return process.env.BUCKET_NAME_IMAGES || "nodejs15-images";
+  }
+
+  static get url_presigned_expires(): number {
+    return Number(process.env.URL_PRESIGNED_EXPIRES) || 120;
+  }
+
+  static get path_images() {
+    return process.env.PATH_IMAGES;
+  }
 }

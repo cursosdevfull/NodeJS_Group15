@@ -9,9 +9,6 @@ export class UserCreate {
   ) {}
 
   async execute(user: User) {
-    /*user.update({
-      password: await this.cryptService.hash(user.properties().password),
-    });*/
     return await this.repo.save(user);
   }
 }
