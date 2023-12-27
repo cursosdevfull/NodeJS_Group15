@@ -48,6 +48,13 @@ export class UserInfrastructure implements UserRepository {
       const user = await repository.findOne({
         where: { email },
       });
+
+      if (!user) {
+        const objError: IError = new Error("User invalid");
+        objError.status = 404;
+        return err(objError);
+      }
+
       return ok(UserDto.fromDataToDomain(user) as User);
     } catch (error: any) {
       const objError: IError = new Error(error.message || error.sqlMessage);

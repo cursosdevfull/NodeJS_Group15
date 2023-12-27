@@ -3,7 +3,6 @@ import { plainToInstance } from "class-transformer";
 import { Address } from "../../domain/entities/address";
 import { Role } from "../../domain/entities/role";
 import { GENDER, User, UserProperties } from "../../domain/roots/user";
-import { UserFactory } from "../../domain/roots/user.factory";
 import { UserEntity } from "../entities/user.entity";
 
 export class UserDto {
@@ -35,7 +34,8 @@ export class UserDto {
       deletedAt: data.deletedAt,
     };
 
-    return UserFactory.create(props);
+    //return UserFactory.create(props);
+    return new User(props);
   }
 
   static fromDomainToData(data: User | User[]): UserEntity | UserEntity[] {

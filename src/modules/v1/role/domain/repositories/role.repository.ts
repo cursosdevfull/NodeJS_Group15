@@ -1,5 +1,5 @@
-import { Role } from "../role";
+import { RoleResult } from "../../infrastructure/role.infrastructure";
 
 export interface RoleRepository {
-  list(): Promise<Role[]>;
+  list(): Promise<RoleResult>;
 }

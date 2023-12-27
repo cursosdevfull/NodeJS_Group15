@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
+import { IError } from "../../../../core/interface/error.interface";
 import { Pagination } from "../../../../core/interface/pagination";
 import { Parameters } from "../../../../core/parameters";
 import { validateData } from "../../../../core/presentation/get-errors";
@@ -32,13 +33,14 @@ export class UserController {
     this.insert = this.insert.bind(this);
   }
 
-  async list(req: Request, res: Response) {
+  async list(req: Request, res: Response, next: NextFunction) {
     const result = await this.userList.execute();
     if (result.isErr()) {
-      return res.status(result.error.status).json({
-        message: result.error.message,
-        stack: result.error.stack,
-      });
+      const error: IError = new Error(result.error.message);
+      error.stack = result.error.stack;
+      error.status = result.error.status;
+
+      return next(error);
     }
 
     const users = result.value;
@@ -72,15 +74,24 @@ export class UserController {
     body.password = await CryptService.hash(body.password);
     if (body.image) body.image = `${Parameters.path_images}/${body.image}`;
 
-    const user = UserFactory.create(body);
+    const resultUser = UserFactory.create(body);
+    if (resultUser.isErr()) {
+      const error: IError = new Error(resultUser.error.message);
+      error.stack = resultUser.error.stack;
+      error.status = resultUser.error.status;
+
+      return next(error);
+    }
+
+    const user = resultUser.value as User;
 
     const result = await this.userCreate.execute(user);
     if (result.isErr()) {
-      return next(result.error);
-      /*return res.status(result.error.status).json({
-        message: result.error.message,
-        stack: result.error.stack,
-      });*/
+      const error: IError = new Error(result.error.message);
+      error.stack = result.error.stack;
+      error.status = result.error.status;
+
+      return next(error);
     }
 
     const userInserted = result.value as User;
@@ -88,7 +99,7 @@ export class UserController {
     res.json(UserDto.fromDomainToResponse(userInserted));
   }
 
-  async getOne(req: Request, res: Response) {
+  async getOne(req: Request, res: Response, next: NextFunction) {
     const id = req.params.id;
 
     const validator = new UserGetOneValidator();
@@ -105,10 +116,11 @@ export class UserController {
 
     const result = await this.userGetOne.execute(id);
     if (result.isErr()) {
-      return res.status(result.error.status).json({
-        message: result.error.message,
-        stack: result.error.stack,
-      });
+      const error: IError = new Error(result.error.message);
+      error.stack = result.error.stack;
+      error.status = result.error.status;
+
+      return next(error);
     }
 
     const user = result.value as User;
@@ -116,16 +128,17 @@ export class UserController {
     res.json(UserDto.fromDomainToResponse(user));
   }
 
-  async update(req: Request, res: Response) {
+  async update(req: Request, res: Response, next: NextFunction) {
     const id = req.params.id;
     const body = req.body;
 
     const result = await this.userGetOne.execute(id);
     if (result.isErr()) {
-      return res.status(result.error.status).json({
-        message: result.error.message,
-        stack: result.error.stack,
-      });
+      const error: IError = new Error(result.error.message);
+      error.stack = result.error.stack;
+      error.status = result.error.status;
+
+      return next(error);
     }
     const user = result.value as User;
     user.update(body);
@@ -143,15 +156,16 @@ export class UserController {
     res.json(UserDto.fromDomainToResponse(userUpdated));
   }
 
-  async delete(req: Request, res: Response) {
+  async delete(req: Request, res: Response, next: NextFunction) {
     const id = req.params.id;
 
     const result = await this.userGetOne.execute(id);
     if (result.isErr()) {
-      return res.status(result.error.status).json({
-        message: result.error.message,
-        stack: result.error.stack,
-      });
+      const error: IError = new Error(result.error.message);
+      error.stack = result.error.stack;
+      error.status = result.error.status;
+
+      return next(error);
     }
 
     const user = result.value as User;
@@ -159,10 +173,11 @@ export class UserController {
 
     const resultDelete = await this.userDelete.execute(user);
     if (resultDelete.isErr()) {
-      return res.status(resultDelete.error.status).json({
-        message: resultDelete.error.message,
-        stack: resultDelete.error.stack,
-      });
+      const error: IError = new Error(resultDelete.error.message);
+      error.stack = resultDelete.error.stack;
+      error.status = resultDelete.error.status;
+
+      return next(error);
     }
 
     const userDeleted = resultDelete.value as User;
@@ -170,16 +185,17 @@ export class UserController {
     res.json(UserDto.fromDomainToResponse(userDeleted));
   }
 
-  async getByPage(req: Request, res: Response) {
+  async getByPage(req: Request, res: Response, next: NextFunction) {
     const page = parseInt(req.query.page as string);
     const limit = parseInt(req.query.limit as string);
 
     const result = await this.userGetByPage.execute(page, limit);
     if (result.isErr()) {
-      return res.status(result.error.status).json({
-        message: result.error.message,
-        stack: result.error.stack,
-      });
+      const error: IError = new Error(result.error.message);
+      error.stack = result.error.stack;
+      error.status = result.error.status;
+
+      return next(error);
     }
 
     const pagination = result.value as Pagination<User>;

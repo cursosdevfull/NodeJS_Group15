@@ -1,15 +1,15 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import { CryptService } from "../../application/services/crypt.service";
-import { UserCreate } from "../../application/user-create";
-import { UserDelete } from "../../application/user-delete";
-import { UserGetByPage } from "../../application/user-get-by-page";
-import { UserGetOne } from "../../application/user-get-one";
-import { UserList } from "../../application/user-list";
-import { UserUpdate } from "../../application/user-update";
-import { UserRepository } from "../../domain/repositories/user.repository";
-import { UserInfrastructure } from "../user.infrastructure";
-import { UserController } from "./controller";
+import { CryptService } from '../../application/services/crypt.service';
+import { UserCreate } from '../../application/user-create';
+import { UserDelete } from '../../application/user-delete';
+import { UserGetByPage } from '../../application/user-get-by-page';
+import { UserGetOne } from '../../application/user-get-one';
+import { UserList } from '../../application/user-list';
+import { UserUpdate } from '../../application/user-update';
+import { UserRepository } from '../../domain/repositories/user.repository';
+import { UserInfrastructure } from '../user.infrastructure';
+import { UserController } from './controller';
 
 class UserRoutes {
   router: Router;
@@ -22,12 +22,12 @@ class UserRoutes {
   }
 
   private mountRoutes(): void {
-    this.router.post("/", this.controller.insert);
-    this.router.get("/", (req, res) => this.controller.list(req, res));
-    this.router.get("/page", (req, res) => this.controller.getByPage(req, res));
-    this.router.get("/:id", (req, res) => this.controller.getOne(req, res));
-    this.router.put("/:id", (req, res) => this.controller.update(req, res));
-    this.router.delete("/:id", (req, res) => this.controller.delete(req, res));
+    this.router.post("/", this.controller.insert.bind(controller));
+    this.router.get("/", this.controller.list.bind(controller));
+    this.router.get("/page", this.controller.getByPage.bind(controller));
+    this.router.get("/:id", this.controller.getOne.bind(controller));
+    this.router.put("/:id", this.controller.update.bind(controller));
+    this.router.delete("/:id", this.controller.delete.bind(controller));
   }
 }
 

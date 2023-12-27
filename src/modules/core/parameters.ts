@@ -1,5 +1,5 @@
-import { RoleEntity } from "../v1/role/infrastructure/entities/role.entity";
-import { UserEntity } from "../v1/user/infrastructure/entities/user.entity";
+import { RoleEntity } from '../v1/role/infrastructure/entities/role.entity';
+import { UserEntity } from '../v1/user/infrastructure/entities/user.entity';
 
 export class Parameters {
   static get port() {
@@ -44,5 +44,15 @@ export class Parameters {
 
   static get path_images() {
     return process.env.PATH_IMAGES;
+  }
+
+  static get token_keyword_secret() {
+    return (
+      process.env.TOKEN_KEYWORD_SECRET || "YrBG4zFksVxRJy4V2E3TsQbeu3Z65uvV"
+    );
+  }
+
+  static get token_expires_in() {
+    return Number(process.env.TOKEN_EXPIRES_IN) || 15;
   }
 }

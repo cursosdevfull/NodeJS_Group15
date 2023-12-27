@@ -16,8 +16,9 @@ class GenerateUrlUploadRoutes {
   }
 
   private mountRoutes(): void {
-    this.router.get("/", (req, res) =>
-      this.controller.generateUrlPresigned(req, res)
+    this.router.get(
+      "/",
+      this.controller.generateUrlPresigned.bind(this.controller)
     );
   }
 }

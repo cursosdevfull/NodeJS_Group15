@@ -1,0 +1,19 @@
+### Login
+POST http://localhost:3000/v1/auth/login
+content-type: application/json
+
+{
+    "email": "sergio26@correo.com",
+    "password": "Mundo2023"
+}
+
+### Login invalid
+POST http://localhost:3000/v1/auth/login
+content-type: application/json
+
+{
+    "email": "sergio26@correodddddd.com",
+    "password": "Mundo2023"
+}
+
+

@@ -16,7 +16,7 @@ class UserRoutes {
   }
 
   private mountRoutes(): void {
-    this.router.get("/", (req, res) => this.controller.list(req, res));
+    this.router.get("/", this.controller.list.bind(this.controller));
   }
 }
 

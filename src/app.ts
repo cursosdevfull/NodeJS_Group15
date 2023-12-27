@@ -2,6 +2,7 @@ import express, { Application, NextFunction, Request, Response } from "express";
 
 import { IError } from "./modules/core/interface/error.interface";
 import { Parameters } from "./modules/core/parameters";
+import authRouter from "./modules/v1/auth/infrastructure/presentation/routes";
 import generateUrlUploadRouter from "./modules/v1/generate-url-upload/infrastructure/presentation/routes";
 import roleRouter from "./modules/v1/role/infrastructure/presentation/routes";
 import userRouter from "./modules/v1/user/infrastructure/presentation/routes";
@@ -25,6 +26,7 @@ class App {
     this.expressApp.use("/v1/user", userRouter);
     this.expressApp.use("/v1/role", roleRouter);
     this.expressApp.use("/v1/generate-url-upload", generateUrlUploadRouter);
+    this.expressApp.use("/v1/auth", authRouter);
   }
 
   private mountErrorHandlers() {
