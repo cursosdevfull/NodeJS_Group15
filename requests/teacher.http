@@ -1,0 +1,15 @@
+### Crear un teacher
+POST http://localhost:3000/v1/teacher
+content-type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiU2VyZ2lvIiwiaW1hZ2UiOiJodHRwczovL25vZGVqczE1LWltYWdlcy5zMy5hbWF6b25hd3MuY29tL2E1Yzk3ZGVmLWVjOGQtNDhmYy05YmUyLWNlMTJiOTg2YWNiNy5qcGciLCJyb2xlcyI6WyJURUFDSEVSIiwiQURNSU4iXSwiaWF0IjoxNzA0MjQ4NDU3ODU0LCJleHAiOjE3MDQyNDg3NTc4NTR9.tRQsxG2FhSjG9lhZ7H1egovcBQDR8922j6vOqaXav30
+
+{
+    "id": "289be435-991e-49be-8540-41304a993e14",
+    "name": "Sergio Hidalgo",
+    "link": "https://www.linkedin.com/in/joseluis/",
+    "summary": "Ingeniero de sistemas con 10 años de experiencia en desarrollo de software"
+}
+
+### Listar los teachers
+GET http://localhost:3000/v1/teacher
+authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiU2VyZ2lvIiwiaW1hZ2UiOiJodHRwczovL25vZGVqczE1LWltYWdlcy5zMy5hbWF6b25hd3MuY29tL2E1Yzk3ZGVmLWVjOGQtNDhmYy05YmUyLWNlMTJiOTg2YWNiNy5qcGciLCJyb2xlcyI6WyJURUFDSEVSIiwiQURNSU4iXSwiaWF0IjoxNzA0MjQ4NDU3ODU0LCJleHAiOjE3MDQyNDg3NTc4NTR9.tRQsxG2FhSjG9lhZ7H1egovcBQDR8922j6vOqaXav30

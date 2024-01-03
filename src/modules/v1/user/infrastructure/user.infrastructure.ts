@@ -63,6 +63,28 @@ export class UserInfrastructure implements UserRepository {
     }
   }
 
+  async getByRefreshToken(refreshToken: string): Promise<UserResult> {
+    const repository =
+      DatabaseBootstrap.getDataSource().getRepository(UserEntity);
+    try {
+      const user = await repository.findOne({
+        where: { refreshToken },
+      });
+
+      if (!user) {
+        const objError: IError = new Error("User invalid");
+        objError.status = 404;
+        return err(objError);
+      }
+
+      return ok(UserDto.fromDataToDomain(user) as User);
+    } catch (error: any) {
+      const objError: IError = new Error(error.message || error.sqlMessage);
+      objError.status = 500;
+      return err(objError);
+    }
+  }
+
   async save(user: User): Promise<UserResult> {
     const repository =
       DatabaseBootstrap.getDataSource().getRepository(UserEntity);

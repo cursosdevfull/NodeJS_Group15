@@ -1,12 +1,13 @@
 ### Crear un usuario
 POST http://localhost:3000/v1/user
 content-type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiU2VyZ2lvIiwiaW1hZ2UiOiJodHRwczovL25vZGVqczE1LWltYWdlcy5zMy5hbWF6b25hd3MuY29tL2E1Yzk3ZGVmLWVjOGQtNDhmYy05YmUyLWNlMTJiOTg2YWNiNy5qcGciLCJyb2xlcyI6WyJURUFDSEVSIiwiQURNSU4iXSwiaWF0IjoxNzA0MjQ1MDA1MzE5LCJleHAiOjE3MDQyNDUzMDUzMTl9.8RIz5Ai91hmVV-V-dMscJroQd2YN91dp0tFP0zyD4To
 
 {
     "id": "289be435-991e-49be-8540-41304a993e14",
-    "name": "Sergio",
+    "name": "José Luis",
     "lastname": "Hidalgo",
-    "email": "sergio26@correo.com",
+    "email": "sergio27@correo.com",
     "password": "Mundo2023",
     "age": 23,
     "gender": "HOMBRE",
@@ -22,6 +23,7 @@ content-type: application/json
 
 ### Listar los usuarios
 GET http://localhost:3000/v1/user
+authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiU2VyZ2lvIiwiaW1hZ2UiOiJodHRwczovL25vZGVqczE1LWltYWdlcy5zMy5hbWF6b25hd3MuY29tL2E1Yzk3ZGVmLWVjOGQtNDhmYy05YmUyLWNlMTJiOTg2YWNiNy5qcGciLCJyb2xlcyI6WyJURUFDSEVSIiwiQURNSU4iXSwiaWF0IjoxNzA0MjQzOTY2MzE0LCJleHAiOjE3MDQyNDQwMTYzMTR9._rNmVLKOkXcP3WKQv1n96ejioYTzKxPvt7L9TAeuEgM
 
 ### Obtener un usuario
 GET http://localhost:3000/v1/user/6f2a6a96-e4d6-43c5-b470-2cd411b1da36

@@ -1,5 +1,6 @@
-import { RoleEntity } from '../v1/role/infrastructure/entities/role.entity';
-import { UserEntity } from '../v1/user/infrastructure/entities/user.entity';
+import { RoleEntity } from "../v1/role/infrastructure/entities/role.entity";
+import { TeacherEntity } from "../v1/teacher/infrastructure/entities/teacher.entity";
+import { UserEntity } from "../v1/user/infrastructure/entities/user.entity";
 
 export class Parameters {
   static get port() {
@@ -17,7 +18,7 @@ export class Parameters {
       username: process.env.DB_USERNAME || "sergio",
       password: process.env.DB_PASSWORD || "12345",
       database: process.env.DB_DATABASE || "cursodb",
-      entities: [UserEntity, RoleEntity],
+      entities: [UserEntity, RoleEntity, TeacherEntity],
       synchronize: process.env.DB_SYNCHRONIZE
         ? process.env.DB_SYNCHRONIZE === "true"
           ? true
@@ -54,5 +55,25 @@ export class Parameters {
 
   static get token_expires_in() {
     return Number(process.env.TOKEN_EXPIRES_IN) || 15;
+  }
+
+  static get redis_host() {
+    return process.env.REDIS_HOST || "localhost";
+  }
+
+  static get redis_port() {
+    return Number(process.env.REDIS_PORT) || 6379;
+  }
+
+  static get redis_password() {
+    return process.env.REDIS_PASSWORD || "12345";
+  }
+
+  static get redis_max_retries_per_request() {
+    return Number(process.env.REDIS_MAX_RETRIES_PER_REQUEST) || 5;
+  }
+
+  static get redis_ttl() {
+    return Number(process.env.REDIS_TTL) || 24 * 60 * 60 * 1000;
   }
 }

@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
+import { RedisBootstrap } from "../../../../../bootstrap/redis.bootstrap";
 import { IError } from "../../../../core/interface/error.interface";
 import { Pagination } from "../../../../core/interface/pagination";
 import { Parameters } from "../../../../core/parameters";
@@ -44,8 +45,14 @@ export class UserController {
     }
 
     const users = result.value;
+    const usersResponse = UserDto.fromDomainToResponse(users as User[]);
 
-    res.json(UserDto.fromDomainToResponse(users as User[]));
+    await RedisBootstrap.set(
+      res.locals.cacheKey,
+      JSON.stringify(usersResponse)
+    );
+
+    res.json(usersResponse);
   }
 
   async insert(req: Request, res: Response, next: NextFunction) {
@@ -94,6 +101,8 @@ export class UserController {
       return next(error);
     }
 
+    RedisBootstrap.clear("user");
+
     const userInserted = result.value as User;
 
     res.json(UserDto.fromDomainToResponse(userInserted));
@@ -124,8 +133,11 @@ export class UserController {
     }
 
     const user = result.value as User;
+    const userResponse = UserDto.fromDomainToResponse(user);
 
-    res.json(UserDto.fromDomainToResponse(user));
+    await RedisBootstrap.set(res.locals.cacheKey, JSON.stringify(userResponse));
+
+    res.json(userResponse);
   }
 
   async update(req: Request, res: Response, next: NextFunction) {
@@ -152,6 +164,7 @@ export class UserController {
     }
 
     const userUpdated = resultUpdated.value as User;
+    await RedisBootstrap.clear("user");
 
     res.json(UserDto.fromDomainToResponse(userUpdated));
   }
@@ -182,6 +195,8 @@ export class UserController {
 
     const userDeleted = resultDelete.value as User;
 
+    await RedisBootstrap.clear("user");
+
     res.json(UserDto.fromDomainToResponse(userDeleted));
   }
 
@@ -199,7 +214,10 @@ export class UserController {
     }
 
     const pagination = result.value as Pagination<User>;
+    const userResponse = UserDto.fromDomainToResponsePagination(pagination);
 
-    res.json(UserDto.fromDomainToResponsePagination(pagination));
+    await RedisBootstrap.set(res.locals.cacheKey, JSON.stringify(userResponse));
+
+    res.json(userResponse);
   }
 }

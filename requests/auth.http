@@ -16,4 +16,7 @@ content-type: application/json
     "password": "Mundo2023"
 }
 
+### Get new access token
+GET http://localhost:3000/v1/auth/new-access-token?refreshToken=0363b818-02ae-4a80-8fe0-223a8dbd4475
+
 

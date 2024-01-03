@@ -1,9 +1,9 @@
-import { Router } from 'express';
+import { Router } from "express";
 
-import { UserInfrastructure } from '../../../user/infrastructure/user.infrastructure';
-import { AuthApplication } from '../../application/auth.application';
-import { AuthRepository } from '../../domain/repositories/auth.repository';
-import { AuthController } from './controller';
+import { UserInfrastructure } from "../../../user/infrastructure/user.infrastructure";
+import { AuthApplication } from "../../application/auth.application";
+import { AuthRepository } from "../../domain/repositories/auth.repository";
+import { AuthController } from "./controller";
 
 class AuthRoutes {
   router: Router;
@@ -17,6 +17,10 @@ class AuthRoutes {
 
   private mountRoutes(): void {
     this.router.post("/login", this.controller.login.bind(controller));
+    this.router.get(
+      "/new-access-token",
+      this.controller.newAccessToken.bind(controller)
+    );
   }
 }
 

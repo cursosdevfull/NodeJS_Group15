@@ -46,4 +46,36 @@ export class AuthApplication {
     const tokens: TTokens = { accessToken, refreshToken };
     return ok(tokens);
   }
+
+  async getNewAccessToken(refreshToken: string): Promise<AuthResult> {
+    const userResult = await this.repository.getByRefreshToken(refreshToken);
+    if (userResult.isErr()) {
+      return err(userResult.error);
+    }
+
+    const user = userResult.value as User;
+    if (!user) {
+      const error: IError = new Error("User invalid");
+      error.status = 404;
+      return err(error);
+    }
+
+    const { name, roles, image } = user.properties();
+    const accessToken = TokensService.createAccessToken(
+      name,
+      image,
+      roles.map((role) => role.name)
+    );
+
+    const newRefreshToken = TokensService.createRefreshToken();
+    user.update({ refreshToken: newRefreshToken });
+
+    const userUpdatedResult = await this.repository.save(user);
+    if (userUpdatedResult.isErr()) {
+      return err(userUpdatedResult.error);
+    }
+
+    const tokens: TTokens = { accessToken, refreshToken: newRefreshToken };
+    return ok(tokens);
+  }
 }
