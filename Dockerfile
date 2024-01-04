@@ -1,6 +1,7 @@
 ARG NODE_VERSION=20
 
-FROM node:${NODE_VERSION}-alpine as base
+#FROM node:${NODE_VERSION}-alpine as base
+FROM 282865065290.dkr.ecr.us-east-1.amazonaws.com/nodejs18 as base
 WORKDIR /usr/src/app
 
 FROM base as deps
