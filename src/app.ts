@@ -29,7 +29,7 @@ class App {
       const statusRedis = RedisBootstrap.redisClient ? true : false;
 
       if (statusDatabase && statusRedis) {
-        res.status(200).send("OK");
+        res.status(200).send("It's ok");
       } else {
         res.status(500).send("Health check failed");
       }
