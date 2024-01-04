@@ -4,7 +4,7 @@
     "Name": "282865065290.dkr.ecr.us-east-1.amazonaws.com/nodejs-curso15"
   },
   "Ports": {
-    "ContainerPort": "80",
-    "HostPort": "80"
+    "ContainerPort": 80,
+    "HostPort": 80
   }
 }
