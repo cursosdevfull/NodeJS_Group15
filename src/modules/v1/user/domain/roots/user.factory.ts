@@ -87,7 +87,7 @@ export class UserFactory {
         return err(resultStreet.error);
       }
     }
-    if (properties.address && properties.address) {
+    if (properties.address && properties.address?.number) {
       const resultNumber = NumberValueVO.create(
         properties.address.number,
         0,

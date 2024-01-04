@@ -75,6 +75,16 @@ services:
       redis-server:
         condition: service_healthy
 
+  sonarqube:
+    image: sonarqube:8-community
+    container_name: nodejs15-sonarqube
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+      - "9092:9092"
+    networks:
+      - nodejs15-mysql-network
+
   app:
     build:
       context: .
