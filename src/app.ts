@@ -1,4 +1,6 @@
+import cors from "cors";
 import express, { Application, NextFunction, Request, Response } from "express";
+import helmet from "helmet";
 
 import { DatabaseBootstrap } from "./bootstrap/database.bootstrap";
 import { RedisBootstrap } from "./bootstrap/redis.bootstrap";
@@ -42,6 +44,14 @@ class App {
   }
 
   private middlewares(): void {
+    this.expressApp.use(
+      cors({
+        origin: "*",
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+      })
+    );
+    this.expressApp.use(helmet());
     this.expressApp.use(express.json());
     this.expressApp.use(express.urlencoded({ extended: false }));
   }
