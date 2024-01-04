@@ -1,0 +1,11 @@
+### Health Check 01
+GET http://localhost:3000/health-check
+
+### Health Check 02
+GET http://localhost:3000/healthcheck
+
+### Health Check 03
+GET http://localhost:3000/healthz
+
+### Health Check 04
+GET http://localhost:3000

@@ -1,0 +1,20 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+  pre_build:
+    commands:
+      - echo Logging into AWS ECR
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 282865065290.dkr.ecr.us-east-1.amazonaws.com/nodejs-curso15
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the docker image
+      - docker-compose -f compose-prod.yaml build
+  post-build:
+    commands:
+      - docker-compose -f compose-prod.yaml push
+artifacts:
+  files:
+    - "Dockerrun.aws.json"

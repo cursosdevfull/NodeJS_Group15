@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: 282865065290.dkr.ecr.us-east-1.amazonaws.com/nodejs-curso15
+    container_name: nodejs15-app

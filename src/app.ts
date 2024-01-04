@@ -1,5 +1,6 @@
 import express, { Application, NextFunction, Request, Response } from "express";
 
+import { DatabaseBootstrap } from "./bootstrap/database.bootstrap";
 import { RedisBootstrap } from "./bootstrap/redis.bootstrap";
 import { IError } from "./modules/core/interface/error.interface";
 import { AuthenticationGuard } from "./modules/core/middlewares/authentication.guard";
@@ -15,10 +16,29 @@ class App {
 
   constructor() {
     this.expressApp = express();
+    this.mountHealthCheck();
     this.middlewares();
     this.mountRoutes();
     this.mountHelpers();
     this.mountErrorHandlers();
+  }
+
+  private mountHealthCheck(): void {
+    const functionStatus = (req: Request, res: Response) => {
+      const statusDatabase = DatabaseBootstrap.getDataSource() ? true : false;
+      const statusRedis = RedisBootstrap.redisClient ? true : false;
+
+      if (statusDatabase && statusRedis) {
+        res.status(200).send("OK");
+      } else {
+        res.status(500).send("Health check failed");
+      }
+    };
+
+    this.expressApp.get("/health-check", functionStatus);
+    this.expressApp.get("/healthcheck", functionStatus);
+    this.expressApp.get("/healthz", functionStatus);
+    this.expressApp.get("/", functionStatus);
   }
 
   private middlewares(): void {
