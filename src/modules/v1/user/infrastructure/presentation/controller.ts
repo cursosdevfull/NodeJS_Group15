@@ -36,6 +36,7 @@ export class UserController {
 
   async list(req: Request, res: Response, next: NextFunction) {
     const result = await this.userList.execute();
+    console.log("result", result.isErr());
     if (result.isErr()) {
       const error: IError = new Error(result.error.message);
       error.stack = result.error.stack;

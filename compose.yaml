@@ -85,28 +85,24 @@ services:
     networks:
       - nodejs15-mysql-network
 
-  app:
+  locust-master:
     build:
       context: .
-      dockerfile: Dockerfile
-    image: nodejs15-app
-    container_name: nodejs15-app
-    #restart: unless-stopped
+      dockerfile: locust/Dockerfile
+    container_name: locust-master
     ports:
-      - "4000:3000"
+      - "8089:8089"
+    command: "--host http://35ad-38-25-16-159.ngrok-free.app --master"
     networks:
       - nodejs15-mysql-network
-    depends_on:
-      mysql-server:
-        condition: service_healthy
-      redis-server:
-        condition: service_healthy
-    #healthcheck:
-    #  test: ["CMD", "curl", "localhost"]
-    #  interval: 5s
-    #  timeout: 5s
-    #  retries: 3
-    #  start_interval: 5s
+
+  locust-slave:
+    build:
+      context: .
+      dockerfile: locust/Dockerfile
+    command: "--host http://35ad-38-25-16-159.ngrok-free.app --master-host=locust-master --slave"
+    networks:
+      - nodejs15-mysql-network
 
 volumes:
   vol-nodejs15-mysql:

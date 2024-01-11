@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="D:\Cursos\NodeJS_Group15\test\unit\user.controller.spec.ts">
+    <testCase name="user/controller list ok" duration="39"/>
+    <testCase name="user/controller list error" duration="4"/>
+    <testCase name="user/controller getOne" duration="6"/>
+  </file>
+</testExecutions>

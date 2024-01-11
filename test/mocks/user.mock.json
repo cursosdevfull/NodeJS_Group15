@@ -1,0 +1,28 @@
+[
+  {
+    "id": "b359b4cf-833c-4b88-b121-7545bf0b2de7",
+    "name": "Carla",
+    "lastname": "Gonzalez",
+    "email": "carla@email.com",
+    "password": "12345",
+    "roles": [
+      {
+        "id": "129b1a96-beaf-443c-b07b-28e733729a9d",
+        "name": "ADMIN"
+      }
+    ]
+  },
+  {
+    "id": "a3b8d46d-f2df-4e91-b69a-a9a74d090a14",
+    "name": "Perla",
+    "lastname": "Ramirez",
+    "email": "perla@email.com",
+    "password": "12345",
+    "roles": [
+      {
+        "id": "129b1a96-beaf-443c-b07b-28e733729a9d",
+        "name": "ADMIN"
+      }
+    ]
+  }
+]

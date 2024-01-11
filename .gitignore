@@ -3,3 +3,4 @@ dist/*
 lear*
 cache/*
 .scannerwork
+reports/*
