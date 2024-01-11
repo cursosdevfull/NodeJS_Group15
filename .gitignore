@@ -4,3 +4,4 @@ learning-typeorm
 dist
 cache
 .scannerwork
+reports/*
